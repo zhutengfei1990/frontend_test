@@ -3,20 +3,34 @@ React是一个声明式，高效且灵活的用于构建用户界面的JavaScrip
 三大核心概念
 响应式UI、虚拟DOM、组件
 响应式UI：只需改变数据，UI就会变化。无需关心DOM更新;
+
 虚拟DOM：绝大多数情况下，操作虚拟DOM比操作DOM快的多；
   diff算法：
     1. 用js对象标识dom结构；
     2. 用这个js对象构建一个真正的DOM树，插入到文档中，当状态变更时，重新构造成一个js对象；
     3. 新旧js对象对比更新计算出差异，最后更新到DOM树上。
   虚拟DOM的好处，方便和其他平台集成，使用js和react编写移动应用，react-native可以编写多端应用；
+
 组件：In React，everything is a component
 包含：属性(props)、状态(state)、生命周期方法；当一个组件的props/state变化时执行重新渲染。
 创建方式
 a. 类组件
+  1. 有state props
+  2. 有生命周期
 
-b. 函数组件（无状态组件即没有state，没有生命周期方法，渲染只由属性决定）
+b. 函数组件（无状态组件即没有state，，渲染只由属性决定）
   1. 组件不会被实例化，整体渲染性能得到提升
-  2. 
+  2. 组件没有生命周期方法
+  3. 只能访问输入的props,不会有调用副作用
+
+JSX: js扩展，是React.createElement方法提供的语法糖，不是必须品
+1. 类xml语法
+2. 增强的js
+
+props & state
+UI = Component(props, state); 组件的数据存储在props和state中。
+props外部参数；state内部变量
+
 
 
 

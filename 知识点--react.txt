@@ -1,0 +1,32 @@
+React是一个声明式，高效且灵活的用于构建用户界面的JavaScript库。使用React可以将一些简短、独立的代码片段组合成复杂的UI界面，这些代码是组件
+
+三大核心概念
+响应式UI、虚拟DOM、组件
+响应式UI：只需改变数据，UI就会变化。无需关心DOM更新;
+虚拟DOM：绝大多数情况下，操作虚拟DOM比操作DOM快的多；
+  diff算法：
+    1. 用js对象标识dom结构；
+    2. 用这个js对象构建一个真正的DOM树，插入到文档中，当状态变更时，重新构造成一个js对象；
+    3. 新旧js对象对比更新计算出差异，最后更新到DOM树上。
+  虚拟DOM的好处，方便和其他平台集成，使用js和react编写移动应用，react-native可以编写多端应用；
+组件：In React，everything is a component
+包含：属性(props)、状态(state)、生命周期方法；当一个组件的props/state变化时执行重新渲染。
+创建方式
+a. 类组件
+
+b. 函数组件（无状态组件即没有state，没有生命周期方法，渲染只由属性决定）
+  1. 组件不会被实例化，整体渲染性能得到提升
+  2. 
+
+
+
+MVVM
+View ViewModel Model,View表示页面视图、ViewModel视图数据模型和展示逻辑、Model业务逻辑和数据库
+
+脚手架
+create-react-app 包含Webpack、Babel、ESlint
+
+
+
+
+

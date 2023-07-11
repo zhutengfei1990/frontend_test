@@ -32,7 +32,7 @@ web安全
 2. 浏览器存储
 3. 渲染过程
 
-websocket&iframe
+iframe & websocket
 
 前端规范
 

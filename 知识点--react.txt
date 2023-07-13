@@ -1,5 +1,11 @@
 React是一个声明式，高效且灵活的用于构建用户界面的JavaScript库。使用React可以将一些简短、独立的代码片段组合成复杂的UI界面，这些代码是组件
 
+MVVM
+View ViewModel Model,View表示页面视图、ViewModel视图数据模型和展示逻辑、Model业务逻辑和数据库
+
+脚手架
+create-react-app 包含Webpack、Babel、ESlint
+
 三大核心概念
 响应式UI、虚拟DOM、组件
 响应式UI：只需改变数据，UI就会变化。无需关心DOM更新;
@@ -30,17 +36,82 @@ JSX: js扩展，是React.createElement方法提供的语法糖，不是必须品
 props & state
 UI = Component(props, state); 组件的数据存储在props和state中。
 props外部参数；state内部变量
+props和state都是普通的JavaScript对象，控制组件渲染
+区别：
+state：可变，组件内部维护。
+props：只读，组件内部不能直接修改。
 
 
+组件通信
+1. 父 -> 子 => props
+2. 子 -> 父 => 回调函数
+3. 跨组件 => context(上下文)、events(发布订阅模式)  => 补充context细节
+context：实现原理：
+
+生命周期
+钩子函数：特定阶段指定的函数；
+Mount: 虚拟DOM到真实DOM；componentWillMount、render、componentDidMount(可操作真实DOM)
+Update：更新重新渲染; shouldComponentUpdate和componentWillUpdate可以获取下一次渲染的props和state；
+Unmount：卸载
+
+React Fiber
+getDerivedStateFromProps(nextProps, prevState): 接受新的属性修改state；
+getSnapshotBeforeUpdate(prevProps, prevState) + componentDidUpdate去掉 componentWillUpdate
 
 
-MVVM
-View ViewModel Model,View表示页面视图、ViewModel视图数据模型和展示逻辑、Model业务逻辑和数据库
+高阶组件：是一个函数，接受一个组件作为参数，并返回一个新的组件；
+作用：封装并分离组件的通用逻辑，将逻辑、state、props修改交给HOC
 
-脚手架
-create-react-app 包含Webpack、Babel、ESlint
+React Hooks可以在函数组件中
+1. 提供state Hook进行状态管理，useState：const [count, setCount] = useState(0)
+2. 提供Effect Hook实现组件的加载、更新和卸载，useEffect: 
+  useEffect(() => {
+    document.title = `You cliked ${count} times`
+  }, [count])
+  每次render之后触发；等于componentDidMount、componentDidUpdate、componentWillUnmount
+  useContext: 组件间共享状态; const value = useContext(MyContext)
+  useCallback:依赖参数变化时改变。作用在于利用memoized减少无效的re-render，来达到性能优化的作用
+使用原则：
+1. 在顶层作用域使用，不再循环、条件、嵌套函数中使用hooks；
+2. 在函数组件中使用。
+好处：
+1. 代码逻辑更清晰
+2. 更优雅的复用
+3. 将组件划分为更小的粒度
+4. 不需要绑定this，提高代码性能
 
+Redux:是一种数据流管理架构；
+使用场景：多交互、多数据源
+核心组成：store、reducer、action、
+store：普通对象，描述state，整个应用只能有一个store；
+  {
+    todo: [
+      {
+        text: 'Eat food',
+        completed: true
+      }
+    ]
+  }
+a. 使用getState()获取state
+b. 使用dispatch(action)更新state
+3. 使用subscribe(listener)注册监听器
 
+action：描述当前发生的事情，改变State的唯一方法是使用action
+const action = {
+  type: 'Add_TODO', // 必须，表示action的名称。
+  text: 'Go go swimming'
+}
+
+reducer：接受state和action，返回新的state
+function func(state, action) {
+  return state // new state
+}
+
+redux思想：根据action对象更新state
+三大原则：
+1. 单一数据源
+2. 状态是只读的
+3. 使用reducer(纯函数)修改状态
 
 
 

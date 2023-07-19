@@ -32,3 +32,36 @@ let const
 正则表达式
 1. 定义
 const reg = /[\d]/  or const reg2 = new RegExp("[\\d]")
+
+2. 常用的
+[a-z] 表示a-z
+[xyz] 一个字符集合xyz
+[^xyz] 匹配任何没有包含在方括号中的字符
+\w 匹配一个单字字符（字母、数字或者下划线
+\d 匹配一个数字
+\s 匹配一个空白字符，包括空格、制表符、换页符和换行符
++ 1到n个 等价于 {1, n}
+* 0到n个       {0, n}
+? 0或1个       {0, 1}
+. 默认匹配除换行符之外的任何单个字符
+
+箭头函数：箭头函数中的this是定义所在的this
+常规定义：
+function (x,y) {
+  return x + y
+}
+箭头函数 (x,y) => x + y
+
+数组方法
+1. includes 'abc'.includes('a') // true
+2. startsWith 'abc'.startsWith('a') // true
+3. endsWith 同
+4. padStart 'abc'.padStart(10, 'a') // '*******abc'
+5. padEnd 同
+6. trimStart 删除开头的空格
+7. trimEnd 同
+8. match 'abc'.match('a') // ['a', index: 0, input: 'abc', groups: undefined]
+9. replace 'abc'.replace('a', 'e') 
+  'abc'.replace(/[ab]/g, 'e') // 'eec'
+  'abc'.replace(/[ab]/, 'e')  // 'ebc'
+ 

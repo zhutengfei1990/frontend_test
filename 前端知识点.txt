@@ -1,0 +1,434 @@
+let const
+1. let 定义变量，let a = 1
+2. const定义常量，const b = 2;定义的是必须赋值；
+3. var 定义变量，有变量提升（定义前就可以使用，且只为undefined，是旧版本js的问题）
+
+解构赋值
+1. 数组 
+  const arr = [1,2]
+  const [a, b] = arr
+2. 对象
+  const obj = { a: 1, b: 2}
+  const { a, b } = obj or const { a: aliasA, b: aliasB } = obj
+
+模板字符串
+1. let a = 'str1'  const str2= `abc ${a}`
+
+字符串方法
+1. includes  'abc'.includes('a)  true
+2. startsWith 'abc'.startsWith('a) true
+3. endsWith 'abc'.endsWith('c) true
+4. padStart 'abc'.padStart(10, 'b') 'bbbbbbbabc'
+5. padEnd 'abc'.padEnd(10, 'b') 'abcbbbbbbb'
+6. trimStart '  abc   '.trimStart()  'abc    '
+7. trimEnd '   abc   '.trimEnd() '    abc'
+8. match  'a2bc'.match(/[\d]+/) // ['2', index: 1, input: 'a2bc', groups: undefined]
+9. 'abc'.replace('a', 'g') // gbc 替换第一个a（仅替换第一个a）
+  'aabc'.replace('a', 'g') // gabc
+  'aabc'.replaceAll('a', 'g') // ggbc 替换所有的a
+  'abc'.replace(/[a-z]/, 1) // 1bc 
+  'abc'.replace(/[a-z]/g, 1) // 111 替换所有的a
+
+正则表达式
+1. 定义
+const reg = /[\d]/  or const reg2 = new RegExp("[\\d]")
+
+2. 常用的
+[a-z] 表示a-z
+[xyz] 一个字符集合xyz
+[^xyz] 匹配任何没有包含在方括号中的字符
+\w 匹配一个单字字符（字母、数字或者下划线
+\d 匹配一个数字
+\s 匹配一个空白字符，包括空格、制表符、换页符和换行符
++ 1到n个 等价于 {1, n}
+* 0到n个       {0, n}
+? 0或1个       {0, 1}
+. 默认匹配除换行符之外的任何单个字符
+
+箭头函数：箭头函数中的this是定义所在的this
+常规定义：
+function (x,y) {
+  return x + y
+}
+箭头函数 (x,y) => x + y
+
+数组方法
+1. Array.from: 类数组转换成数组
+类数组长这样：
+let arrayLike = {
+  '0': 'a',
+  '1': 'b',
+  '2': 'c',
+  length: 3
+};
+let arr2 = Array.from(arrayLike); // ['a', 'b', 'c']
+
+2. Array.of 将一组值，转换为数组
+Array.of(3, 11, 8) // [3,11,8]
+
+3. find 找出第一个符合条件的数组成员,注意是第一个
+[1, 4, -5, 10].find((n) => n < 0) // -5
+
+4. entries  entries()是对键值对的遍历
+for (let [index, elem] of ['a', 'b'].entries()) {
+  console.log(index, elem);
+}
+// 0 "a"
+// 1 "b"
+
+5. keys keys()是对键名的遍历
+for (let index of ['a', 'b'].keys()) {
+  console.log(index);
+}
+// 0
+// 1
+
+6. values values()是对键值的遍历，
+for (let elem of ['a', 'b'].values()) {
+  console.log(elem);
+}
+// 'a'
+// 'b'
+
+7. forEach 遍历数组
+arr.forEach(item => {
+  console.log(item)
+})
+
+8. map 数组每个元素都执行指定函数
+const map1 = [1, 4, 9, 16].map(x => x * 2); # 2, 8, 18, 32
+
+9. reduce 和python中类似
+// 0 + 1 + 2 + 3 + 4
+const initialValue = 0; // 初始化值
+const sumWithInitial = [1, 2, 3, 4].reduce(
+  (accumulator, currentValue) => accumulator + currentValue,
+  initialValue
+);
+
+10. filter
+const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present']
+const result = words.filter(word => word.length > 6)
+
+对象方法
+1. Object.is 确定两个值是否为相同值
+Object.is('1', 1) // false
+Object.is(NaN, NaN) // true
+Object.is(-0, 0) // false
+const obj = {};
+Object.is(obj, {}) // false
+
+2. Object.assign赋值合并对象
+const target = { a: 1, b: 2 };
+const source = { b: 4, c: 5 };
+const returnedTarget = Object.assign(target, source); # { a: 1, b: 4, c: 5 } Target 与 target相同
+
+3. Object.getOwnPropertyDescriptors() 静态方法返回给定对象的所有自有属性描述符。
+
+4. Object.keys 返回对象的key
+const object1 = {
+  a: 'somestring',
+  b: 42,
+  c: false
+};
+Object.keys(object1) => ["a", "b", "c"]
+
+5. Object.entries 返回的键值对
+const object1 = {
+  a: 'somestring',
+  b: 42
+};
+
+for (const [key, value] of Object.entries(object1)) {
+  console.log(`${key}: ${value}`);
+}
+// "a: somestring"
+// "b: 42"
+
+6. Object.hasOwn()  // 对象自身有指定的属性
+const object1 = {
+  prop: 'exists'
+};
+Object.hasOwn(object1, 'prop'); // true
+
+Symbol 永远不重复的值
+let s = Symbol();
+
+Set 集合，通常用来去重
+const set = new Set([1, 2, 3, 4, 4]);
+[...set] // [1, 2, 3, 4]
+
+WeakSet // 与Set类似，不同的是WeakSet的成员只能是对象
+
+Map 和对象一样，有key和value
+const m = new Map();
+const o = {p: 'Hello World'};
+m.set(o, 'content')
+m.get(o) // "content"
+
+WeakMap # 和Map类似，不同的是key必须是对象
+
+Proxy 拦截一个对象的操作，比如给属性赋值。有点像python里的装饰器
+new Proxy(obj, {
+  get: function(target, propKey, receiver) {
+    console.log('这里就是拦截之后可以用的操作')
+    return Reflect.get(target, propKey, receiver)
+  },
+  set: function (target, propKey, value, receiver) {
+    console.log('这里就是拦截之后可以用的操作')
+    return Reflect.set(target, propKey, value, receiver);
+  }
+})
+
+Reflect Object的升级版；把Object一些旧方法或者后续添加的方法添加到Reflect中。
+
+Promise 一种异步解决方案，有3中状态 pending（进行中）、fulfilled（已成功）和rejected（已失败）
+const promise = new Promise((resolve, reject) => {
+  if (/* 异步操作成功 */){
+    resolve(value);
+  } else {
+    reject(error);
+  }
+}) 
+
+通过then获取值 
+promise.then((val1) => { 成功的回调  }, (val2) => { 失败的回调 })
+
+通过catch获取失败的Error
+promise.catch(err => {  })
+
+Generator # 与python类似，特征是
+1. 正常函数定义的时候加个 * 号
+2. 包含yeild语句
+
+function* helloWorldGenerator() {
+  yield 'hello';
+  return 'ending';
+}
+
+const hw = helloWorldGenerator()
+通过next访问，比如 hw.next() => { value: 'hello', done: false }
+async/await 在多重嵌套的时候，可以简化逻辑，易于维护，使用try catch包裹
+async function () {
+  try {
+    const res = await ajaxApi()
+  } catch(e) {
+
+  }
+}
+
+Iterator 只有部署了iterator接口，才可使用for of遍历
+const arr = ['red', 'green', 'blue'];  // 默认部署了iterator接口
+for(let v of arr) {
+  console.log(v); // red green blue
+}
+
+
+ES module 模块化
+使用import导入
+import { firstName } from './profile.js'; // 导入其中一个函数
+import aaaObj from './profile.js'; // 导入整个对象
+import * as circle from './circle';  // 导入整个对象并起个别名
+
+使用export导出
+export const a = 1 // 导出一个变量
+export default {} // 默认导出，一个文件只有一个default
+
+class
+class Point {
+  constructor(x, y) { // 构造函数
+    this.x = x;
+    this.y = y;
+  }
+}
+const p = new Point(1,2) // 生成实例
+
+
+跨域和跨站
+http://www.qq.com:80 => {协议}://{域名}：{端口}  这三个只要一个不同，则存在跨域
+通常被调方设置access-control-allow-origin允许跨域。老的方法是jsonp
+
+跨站 域名不同
+a.qq.com b.qq.com 不跨站
+a.qq.com b.baidu.com 跨站
+
+html语义化标签
+head、title、body、footer、nav、aside等
+
+css选择器
+#id  id选择器
+.className 类选择器
+div 标签选择器
+div[attr='a'] 属性选择器
+
+一个冒号是伪类，两个是伪元素
+伪类
+:hover
+:link
+:visited
+:first-child
+
+伪元素
+::before
+::after
+
+样式引入
+1. 内部
+<style>
+ a {
+  color: red
+ }
+</style>
+
+2. 外部引入
+<link rel="stylesheet" type="text/css" href="/c8.css">
+
+3.内联 
+<a style="color: red"></a>
+
+xss
+跨站脚本攻击，常用在论坛，恶意用户上传恶意代码，比如写一段 <script>恶意代码</script>
+解决方案：转义 将 < 变成 '%3C'
+
+csrf
+利用正常用户登陆态，后台认为是正常登陆
+解决方案：在请求头中加token
+
+性能优化
+1. 通过webpack减少打包后的体积。
+2. 启用http2
+3. 使用缓存
+  协商缓存：请求服务器，校验缓存是否过期，两对请求头：Last-Modifed/If-Modified-Since   和   Etag/If-None-Match
+  强缓存：Expires绝对时间；Cache-Control max-age相对时间
+
+如果不用缓存，Cache-Control 设置为no-store
+
+
+本地存储
+localStorage: 永久存储
+SessionStorage: 会话级别的存储
+cookie：有过期时间，会发送到后台
+
+命名规范
+1. 数字字母下划线，不能数字开头
+2. 小驼峰 比如nameSpace
+
+
+Webpack是打包工具
+
+
+
+React是一个声明式，高效且灵活的用于构建用户界面的JavaScript库。使用React可以将一些简短、独立的代码片段组合成复杂的UI界面，这些代码是组件
+
+MVVM
+View ViewModel Model,View表示页面视图、ViewModel视图数据模型和展示逻辑、Model业务逻辑和数据库
+
+脚手架
+create-react-app 包含Webpack、Babel、ESlint
+
+三大核心概念
+响应式UI、虚拟DOM、组件
+响应式UI：只需改变数据，UI就会变化。无需关心DOM更新;
+
+虚拟DOM：绝大多数情况下，操作虚拟DOM比操作DOM快的多；
+  diff算法：
+    1. 用js对象标识dom结构；
+    2. 用这个js对象构建一个真正的DOM树，插入到文档中，当状态变更时，重新构造成一个js对象；
+    3. 新旧js对象对比更新计算出差异，最后更新到DOM树上。
+  虚拟DOM的好处，方便和其他平台集成，使用js和react编写移动应用，react-native可以编写多端应用；
+
+组件：In React，everything is a component
+包含：属性(props)、状态(state)、生命周期方法；当一个组件的props/state变化时执行重新渲染。
+创建方式
+a. 类组件
+  1. 有state props
+  2. 有生命周期
+
+b. 函数组件（无状态组件即没有state，，渲染只由属性决定）
+  1. 组件不会被实例化，整体渲染性能得到提升
+  2. 组件没有生命周期方法
+  3. 只能访问输入的props,不会有调用副作用
+
+JSX: js扩展，是React.createElement方法提供的语法糖，不是必须品
+1. 类xml语法
+2. 增强的js
+
+props & state
+UI = Component(props, state); 组件的数据存储在props和state中。
+props外部参数；state内部变量
+props和state都是普通的JavaScript对象，控制组件渲染
+区别：
+state：可变，组件内部维护。
+props：只读，组件内部不能直接修改。
+
+
+组件通信
+1. 父 -> 子 => props
+2. 子 -> 父 => 回调函数
+3. 跨组件 => context(上下文)、events(发布订阅模式)  => 补充context细节
+context：实现原理：
+
+生命周期
+钩子函数：特定阶段指定的函数；
+Mount: 虚拟DOM到真实DOM；componentWillMount、render、componentDidMount(可操作真实DOM)
+Update：更新重新渲染; shouldComponentUpdate和componentWillUpdate可以获取下一次渲染的props和state；
+Unmount：卸载
+
+React Fiber
+getDerivedStateFromProps(nextProps, prevState): 接受新的属性修改state；
+getSnapshotBeforeUpdate(prevProps, prevState) + componentDidUpdate去掉 componentWillUpdate
+
+
+高阶组件：是一个函数，接受一个组件作为参数，并返回一个新的组件；
+作用：封装并分离组件的通用逻辑，将逻辑、state、props修改交给HOC
+
+React Hooks可以在函数组件中
+1. 提供state Hook进行状态管理，useState：const [count, setCount] = useState(0)
+2. 提供Effect Hook实现组件的加载、更新和卸载，useEffect: 
+  useEffect(() => {
+    document.title = `You cliked ${count} times`
+  }, [count])
+  每次render之后触发；等于componentDidMount、componentDidUpdate、componentWillUnmount
+  useContext: 组件间共享状态; const value = useContext(MyContext)
+  useCallback:依赖参数变化时改变。作用在于利用memoized减少无效的re-render，来达到性能优化的作用
+使用原则：
+1. 在顶层作用域使用，不再循环、条件、嵌套函数中使用hooks；
+2. 在函数组件中使用。
+好处：
+1. 代码逻辑更清晰
+2. 更优雅的复用
+3. 将组件划分为更小的粒度
+4. 不需要绑定this，提高代码性能
+
+Redux:是一种数据流管理架构；
+使用场景：多交互、多数据源
+核心组成：store、reducer、action、
+store：普通对象，描述state，整个应用只能有一个store；
+  {
+    todo: [
+      {
+        text: 'Eat food',
+        completed: true
+      }
+    ]
+  }
+a. 使用getState()获取state
+b. 使用dispatch(action)更新state
+3. 使用subscribe(listener)注册监听器
+
+action：描述当前发生的事情，改变State的唯一方法是使用action
+const action = {
+  type: 'Add_TODO', // 必须，表示action的名称。
+  text: 'Go go swimming'
+}
+
+reducer：接受state和action，返回新的state
+function func(state, action) {
+  return state // new state
+}
+
+redux思想：根据action对象更新state
+三大原则：
+1. 单一数据源
+2. 状态是只读的
+3. 使用reducer(纯函数)修改状态
